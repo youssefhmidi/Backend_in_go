@@ -11,32 +11,32 @@ this will contain two parts
 mainly using sqlite as a database and GORM as an ORM
 
 Tables:
--usr Table:
-    -ID
-    -UserName
-    -Password
-    -Email
-    -DateCreated
--shop Table:
-    -ID
-    -OwnerID "aka user"
-    -Name
-    -Category
-    -IsPrivet
-    -DateCreated
--Products Table:
-    -ID
-    -ShopID
-    -Name
-    -Descriptions
-    -Price
-    -Detail "JSON type"
--order Table:
-    -ID
-    -ShopID
-    -OrdererID
-    -ProductID
-    -DateCreated
+- usr Table:
+    - ID
+    - UserName
+    - Password
+    - Email
+    - DateCreated
+- shop Table:
+    - ID
+    - OwnerID "aka user"
+    - Name
+    - Category
+    - IsPrivet
+    - DateCreated
+- Products Table:
+    - ID
+    - ShopID
+    - Name
+    - Descriptions
+    - Price
+    - Detail "JSON type"
+- order Table:
+    - ID
+    - ShopID
+    - OrdererID
+    - ProductID
+    - DateCreated
 
 ## API
 using gin to make http request available
