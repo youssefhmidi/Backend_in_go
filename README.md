@@ -42,16 +42,16 @@ Tables:
 using gin to make http request available
 
 there will be 5 Requests possible
--"/signup": create user and response with an JWT token
--"/login": check for the user and response with an JWT token
--"/shop/": an endpoint where users can: create, delete, list or edit their shops
-    -It will contain these Requests:
-        -create: " /shop/create "
-        -getall: " /shop/getall "
-        -delete: " /shop/delete "
-        -edit:   " /shop/edit "
-        -access a specific shop: " /shop/'shopId' "
--"/browse/": an endpoint where user can: view public shops and buy products
-    -It will contain these Requests:
-        -get the most recent ,aka the top 10: " /browse/recents "
-        -get by filter: " /browse/filter " + a payload with data of the filter
+- "/signup": create user and response with an JWT token
+- "/login": check for the user and response with an JWT token
+- "/shop/": an endpoint where users can: create, delete, list or edit their shops
+    - It will contain these Requests:
+        - create: " /shop/create "
+        - getall: " /shop/getall "
+        - delete: " /shop/delete "
+        - edit:   " /shop/edit "
+        - access a specific shop: " /shop/'shopId' "
+- "/browse/": an endpoint where user can: view public shops and buy products
+    - It will contain these Requests:
+        - get the most recent ,aka the top 10: " /browse/recents "
+        - get by filter: " /browse/filter " + a payload with data of the filter
