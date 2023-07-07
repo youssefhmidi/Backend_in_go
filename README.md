@@ -5,7 +5,7 @@ trying to make it work that's it
 
 
 # infastrucutre 
-this will contain three parts
+this will contain two parts
 
 ## database
 mainly using sqlite as a database and GORM as a ORM
