@@ -1,0 +1,17 @@
+## Directory Explained 
+
+### Controller directory "/controller/"
+Contains all the functions logic that will connect with the models and the database 
+Example:
+    - user requested a Login session, the controller will grab the response ,that he should give to the user, from the Model and send it back.
+
+### Middleware directory "/middleware/"
+Contains the functionnalities that the backend API will use to identify requesters
+Example:
+    -check if the access token is validated or not 
+### Routes directory "/routes/"
+Contais all the possible routes that users can request to
+
+### Test Directory "/test/"
+All the testing files of the api functionnalities and for debuging
+
