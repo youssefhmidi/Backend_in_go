@@ -21,7 +21,7 @@ Tables:
     - Category
     - IsPrivet
     - DateCreated
-- Products Table:
+- product Table:
     - ID
     - ShopID
     - Name
@@ -32,8 +32,11 @@ Tables:
     - ID
     - ShopID
     - OrdererID
-    - ProductID
     - DateCreated
+- productorder Table: "junction table for the 'Many to Many' relation betwwen product and order
+    - ID
+    - Product ID
+    - Order ID
 
 ## API
 using gin to make http request available
