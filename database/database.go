@@ -1,6 +1,8 @@
 package database
 
 import (
+	"fmt"
+
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -9,6 +11,8 @@ type SqliteDatabase interface {
 	Init(location string) error
 	CreateTable(Model interface{}) error
 	AddRow(Input interface{})
+	FindOneById(VarToAssign *interface{}, id uint)
+	FindOneByCol(VarToAssign interface{}, Col string, Input string) *gorm.DB
 }
 type Database struct {
 	Database *gorm.DB
@@ -25,6 +29,14 @@ func (db *Database) CreateTable(Model interface{}) error {
 	return err
 }
 
-func (db *Database) AddRow(Input interface{}) {
-	db.Database.Create(Input)
+func (db *Database) Add(Input interface{}) *gorm.DB {
+	return db.Database.Create(Input)
+}
+
+func (db *Database) FindOneByID(VarToAssign interface{}, Id uint) *gorm.DB {
+	return db.Database.First(VarToAssign, Id)
+}
+
+func (db *Database) FindOneByCol(VarToAssign interface{}, Col string, Input string) *gorm.DB {
+	return db.Database.First(VarToAssign, fmt.Sprintf("%v = ?", Col), Input)
 }

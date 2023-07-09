@@ -1,4 +1,4 @@
-## Directory Explained 
+## Directories Objectifs 
 
 ### Controller directory "/controller/"
 Contains all the functions logic that will connect with the models and the database 
@@ -16,4 +16,16 @@ Contais all the possible routes that users can request to
 
 ### Test Directory "/test/"
 All the testing files of the api functionnalities and for debuging
+
+### Database Directory "/database/"
+the database connector and initializer
+
+### Models Directory "/models/"
+contains informations about the models and the response/request structure
+
+### Bootstrap directory "/bootstrap/"
+initializing the Env variables and the app
+
+### cmd directory "/cmd/"
+the main file
 
