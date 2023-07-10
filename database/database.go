@@ -1,6 +1,7 @@
 package database
 
 import (
+	"context"
 	"fmt"
 
 	"gorm.io/driver/sqlite"
@@ -10,9 +11,9 @@ import (
 type SqliteDatabase interface {
 	Init(location string) error
 	CreateTable(Model interface{}) error
-	AddRow(Input interface{})
-	FindOneById(VarToAssign *interface{}, id uint)
-	FindOneByCol(VarToAssign interface{}, Col string, Input string) *gorm.DB
+	Add(ctx context.Context, Input interface{}) *gorm.DB
+	FindOneById(ctx context.Context, VarToAssign interface{}, id uint) *gorm.DB
+	FindOneByCol(ctx context.Context, VarToAssign interface{}, Col string, Input string) *gorm.DB
 }
 type Database struct {
 	Database *gorm.DB
@@ -29,14 +30,14 @@ func (db *Database) CreateTable(Model interface{}) error {
 	return err
 }
 
-func (db *Database) Add(Input interface{}) *gorm.DB {
-	return db.Database.Create(Input)
+func (db *Database) Add(ctx context.Context, Input interface{}) *gorm.DB {
+	return db.Database.WithContext(ctx).Create(Input)
 }
 
-func (db *Database) FindOneByID(VarToAssign interface{}, Id uint) *gorm.DB {
-	return db.Database.First(VarToAssign, Id)
+func (db *Database) FindOneById(ctx context.Context, VarToAssign interface{}, Id uint) *gorm.DB {
+	return db.Database.WithContext(ctx).First(VarToAssign, Id)
 }
 
-func (db *Database) FindOneByCol(VarToAssign interface{}, Col string, Input string) *gorm.DB {
-	return db.Database.First(VarToAssign, fmt.Sprintf("%v = ?", Col), Input)
+func (db *Database) FindOneByCol(ctx context.Context, VarToAssign interface{}, Col string, Input string) *gorm.DB {
+	return db.Database.WithContext(ctx).First(VarToAssign, fmt.Sprintf("%v = ?", Col), Input)
 }

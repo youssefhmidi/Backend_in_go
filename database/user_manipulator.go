@@ -1,34 +1,36 @@
 package database
 
 import (
+	"context"
+
 	"github.com/youssefhmidi/Backend_in_go/models"
 )
 
 type UserLogic struct {
-	db Database
+	db SqliteDatabase
 }
 
-func NewUserLogic(Db Database) models.ManipulatorUser {
+func NewUserLogic(Db SqliteDatabase) models.ManipulatorUser {
 	return &UserLogic{
 		db: Db,
 	}
 }
 
-func (um *UserLogic) CreateUser(usr *models.User) error {
-	result := um.db.Add(&usr)
+func (um *UserLogic) CreateUser(ctx context.Context, usr *models.User) error {
+	result := um.db.Add(ctx, &usr)
 
 	return result.Error
 }
-func (um UserLogic) GetById(ID uint) (models.User, error) {
+func (um UserLogic) GetById(ctx context.Context, ID uint) (models.User, error) {
 	var usr models.User
-	result := um.db.FindOneByID(&usr, ID)
+	result := um.db.FindOneById(ctx, &usr, ID)
 
 	return usr, result.Error
 }
 
-func (um UserLogic) GetByEmail(Email string) (models.User, error) {
+func (um UserLogic) GetByEmail(ctx context.Context, Email string) (models.User, error) {
 	var usr models.User
-	result := um.db.FindOneByCol(usr, "email", Email)
+	result := um.db.FindOneByCol(ctx, usr, "email", Email)
 
 	return usr, result.Error
 }

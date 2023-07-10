@@ -1,8 +1,10 @@
 package database
 
 import (
+	"context"
 	"fmt"
 	"testing"
+	"time"
 )
 
 func TestInit(t *testing.T) {
@@ -33,6 +35,8 @@ func TestCreatingAModel(t *testing.T) {
 func TestAdd(t *testing.T) {
 	var DB Database
 	DB.Init("./db/testdb.db")
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*2)
+	defer cancel()
 
 	type TestModel struct {
 		ID         uint `gorm:"primaryKey"`
@@ -40,7 +44,7 @@ func TestAdd(t *testing.T) {
 		TestField2 string
 	}
 
-	result := DB.Add(&TestModel{TestField1: "testValue1", TestField2: "testValue2"})
+	result := DB.Add(ctx, &TestModel{TestField1: "testValue1", TestField2: "testValue2"})
 
 	err := result.Error
 	if err != nil {
@@ -51,7 +55,8 @@ func TestAdd(t *testing.T) {
 func TestFetch(t *testing.T) {
 	var DB Database
 	DB.Init("./db/testdb.db")
-
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*2)
+	defer cancel()
 	type TestModel struct {
 		ID         uint `gorm:"primaryKey"`
 		TestField1 string
@@ -59,14 +64,14 @@ func TestFetch(t *testing.T) {
 	}
 
 	var tst1 TestModel
-	rs := DB.FindOneByID(&tst1, 1)
+	rs := DB.FindOneById(ctx, &tst1, 1)
 	if rs.Error != nil {
 		t.Fatalf("cannot get the Item by Id , got err: '%v'", rs.Error)
 	}
 	fmt.Println(tst1)
 
 	var tst2 TestModel
-	rs2 := DB.FindOneByCol(&tst2, "test_field1", "testValue1")
+	rs2 := DB.FindOneByCol(ctx, &tst2, "test_field1", "testValue1")
 	if rs2.Error != nil {
 		t.Fatalf("cannot get the Item by Id , got err: '%v'", rs2.Error)
 	}
