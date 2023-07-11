@@ -1,9 +1,19 @@
 package main
 
 import (
-	"fmt"
+	"github.com/gin-gonic/gin"
+	"github.com/youssefhmidi/Backend_in_go/bootstrap"
+	"github.com/youssefhmidi/Backend_in_go/routes"
 )
 
 func main() {
-	fmt.Println("Hey  s")
+	app := bootstrap.App()
+
+	ParentRoute := gin.Default()
+	env := app.Env
+	db := app.Database
+
+	routes.SetupRoutes(db, env, ParentRoute)
+
+	ParentRoute.Run()
 }

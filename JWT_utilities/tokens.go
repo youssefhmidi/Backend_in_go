@@ -30,7 +30,7 @@ func CreateRefreshToken(usr models.User, secret string, expiry int) (string, err
 			ExpiresAt: jwt.NewNumericDate(exp),
 		},
 	}
-	token := jwt.NewWithClaims(jwt.SigningMethodES256, claim)
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claim)
 	tokenStr, err := token.SignedString([]byte(secret))
 	return tokenStr, err
 }

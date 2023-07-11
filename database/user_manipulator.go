@@ -30,7 +30,7 @@ func (um UserLogic) GetById(ctx context.Context, ID uint) (models.User, error) {
 
 func (um UserLogic) GetByEmail(ctx context.Context, Email string) (models.User, error) {
 	var usr models.User
-	result := um.db.FindOneByCol(ctx, usr, "email", Email)
+	result := um.db.FindOneByCol(ctx, &usr, "email", Email)
 
 	return usr, result.Error
 }

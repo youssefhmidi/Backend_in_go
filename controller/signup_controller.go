@@ -38,8 +38,8 @@ func (sc SignUpController) SignUp(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(c, time.Second*time.Duration(sc.Env.ContextTimeout))
 	_, err = sc.UsrLogic.GetByEmail(ctx, req.Email)
 	defer cancel()
-	if err != nil {
-		c.JSON(http.StatusBadRequest, models.ErrorResponse{Message: "the Email is already used by another user"})
+	if err == nil {
+		c.JSON(http.StatusConflict, models.ErrorResponse{Message: "the Email is already used by another user"})
 		return
 	}
 
