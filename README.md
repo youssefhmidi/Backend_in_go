@@ -8,20 +8,20 @@ this will contain two parts
 mainly using sqlite as a database and GORM as an ORM
 
 Tables:
-- usr Table:
+- usr Table: ✅
     - ID
     - UserName
     - Password
     - Email
     - DateCreated
-- shop Table:
+- shop Table: ✅
     - ID
     - OwnerID "aka user"
     - Name
     - Category
     - IsPrivet
     - DateCreated
-- product Table:
+- product Table: ✅
     - ID
     - ShopID
     - Name
@@ -42,8 +42,8 @@ Tables:
 using gin to make http request available
 
 there will be 5 Requests possible
-- "/signup": create user and response with an JWT token
-- "/login": check for the user and response with an JWT token
+- "/signup": create user and response with an JWT token ✅
+- "/login": check for the user and response with an JWT token ✅
 - "/shop/": an endpoint where users can: create, delete, list or edit their shops
     - It will contain these Requests:
         - create: " /shop/create "

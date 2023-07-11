@@ -12,6 +12,7 @@ func CreateAccessToken(usr models.User, secret string, expiry int) (string, erro
 	exp := time.Now().Add(time.Hour * time.Duration(expiry))
 	claim := &models.JwtClaims{
 		Name: usr.Username,
+		ID:   usr.ID,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(exp),
 		},
