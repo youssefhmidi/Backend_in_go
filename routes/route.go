@@ -8,8 +8,11 @@ import (
 
 func SetupRoutes(db database.SqliteDatabase, env bootstrap.Env, parentRoute *gin.Engine) {
 	// public routes
-	PublicRoute := parentRoute.Group("")
-	NewLoginRoute(db, &env, PublicRoute)
-	NewSignUpRoute(db, &env, PublicRoute)
+	PublicRoutes := parentRoute.Group("")
+	NewLoginRoute(db, &env, PublicRoutes)
+	NewSignUpRoute(db, &env, PublicRoutes)
 
+	// user only routes
+	PrivetRoutes := parentRoute.Group("")
+	NewUserRoute(db, &env, PrivetRoutes)
 }

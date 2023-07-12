@@ -3,6 +3,7 @@ package models
 import (
 	"context"
 
+	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
 
@@ -19,4 +20,8 @@ type ManipulatorUser interface {
 	CreateUser(ctx context.Context, usr *User) error
 	GetById(ctx context.Context, ID uint) (User, error)
 	GetByEmail(ctx context.Context, Email string) (User, error)
+}
+
+type UserRoute interface {
+	Me(c *gin.Context)
 }

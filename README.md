@@ -44,6 +44,7 @@ using gin to make http request available
 there will be 5 Requests possible
 - "/signup": create user and response with an JWT token ✅
 - "/login": check for the user and response with an JWT token ✅
+- "/me" : returns the current user informations ✅
 - "/shop/": an endpoint where users can: create, delete, list or edit their shops
     - It will contain these Requests:
         - create: " /shop/create "

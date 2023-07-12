@@ -20,4 +20,10 @@ func TestCreateAndAuthT(t *testing.T) {
 	if Err != nil {
 		log.Fatalf("it got worse, we got this error : %v", Err)
 	}
+
+	tkn, err := GetIDFromToken(token, "supper_Secret")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	log.Println(tkn)
 }
