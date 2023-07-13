@@ -47,11 +47,11 @@ there will be 5 Requests possible
 - "/me" : returns the current user informations ✅
 - "/shop/": an endpoint where users can: create, delete, list or edit their shops
     - It will contain these Requests:
-        - create: " /shop/create "
-        - getall: " /shop/getall "
-        - delete: " /shop/delete "
-        - edit:   " /shop/edit "
-        - access a specific shop: " /shop/'shopId' "
+        - create: " /shop/create "✅
+        - getall: " /shop/getall "✅
+        - delete: " /shop/delete "✅
+        - edit:   " /shop/edit "✅
+        - access a specific shop: " /shop/get?name='Shop name' " or " /shop/get?id='Shop id' " ✅
 - "/browse/": an endpoint where user can: view public shops and buy products
     - It will contain these Requests:
         - get the most recent ,aka the top 10: " /browse/recents "

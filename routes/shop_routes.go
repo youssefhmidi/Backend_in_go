@@ -15,4 +15,6 @@ func NewShopRoutes(db database.SqliteDatabase, env *bootstrap.Env, group *gin.Ro
 	group.POST("/shop/create", sc.CreateShop)
 	group.GET("/shop/get", sc.GetShop)
 	group.GET("/shop/getall", sc.GetAllShop)
+	group.PATCH("/shop/edit", sc.EditShop)
+	group.DELETE("/shop/delete", sc.DeleteShop)
 }

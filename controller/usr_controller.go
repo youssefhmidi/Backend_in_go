@@ -2,7 +2,6 @@ package controller
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 	"time"
 
@@ -46,7 +45,6 @@ func (uc UserController) Me(c *gin.Context) {
 
 	ctx, cancel := context.WithTimeout(c, time.Second*time.Duration(uc.Env.ContextTimeout))
 	usr, err := uc.UsrLogic.GetById(ctx, ID)
-	fmt.Println(usr)
 	defer cancel()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, models.ErrorResponse{Message: err.Error()})

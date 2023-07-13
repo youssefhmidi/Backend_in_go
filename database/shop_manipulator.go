@@ -42,3 +42,12 @@ func (sl *ShopLogic) FetchAll(ctx context.Context, limit int) ([]models.Shop, er
 	slice := Payload.([]models.Shop)
 	return slice, err
 }
+
+func (sl *ShopLogic) UpdateShop(ctx context.Context, Shop *models.Shop, field string, value interface{}) error {
+	return sl.db.UpdateRow(ctx, Shop, field, value).Error
+}
+
+func (sl *ShopLogic) DeleteShop(ctx context.Context, Shop *models.Shop) error {
+	res := sl.db.DeleteRecordById(ctx, &models.Shop{}, Shop.ID).Error
+	return res
+}

@@ -6,6 +6,7 @@ import (
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type SqliteDatabase interface {
@@ -16,7 +17,8 @@ type SqliteDatabase interface {
 	FindOneByCol(ctx context.Context, VarToAssign interface{}, Col string, Input string) *gorm.DB
 	AppendTo(field string, Model interface{}, Paylod interface{}) error
 	FindAll(limit int, RespPayload interface{}) (interface{}, error)
-	Preload(ModelName string) *gorm.DB
+	UpdateRow(ctx context.Context, Model interface{}, Col string, NewVal interface{}) *gorm.DB
+	DeleteRecordById(ctx context.Context, Model interface{}, Id uint) *gorm.DB
 }
 type Database struct {
 	Database *gorm.DB
@@ -38,7 +40,7 @@ func (db *Database) Add(ctx context.Context, Input interface{}) *gorm.DB {
 }
 
 func (db *Database) FindOneById(ctx context.Context, VarToAssign interface{}, Id uint) *gorm.DB {
-	return db.Database.WithContext(ctx).First(VarToAssign, Id)
+	return db.Database.Preload(clause.Associations).WithContext(ctx).First(VarToAssign, Id)
 }
 
 func (db *Database) FindOneByCol(ctx context.Context, VarToAssign interface{}, Col string, Input string) *gorm.DB {
@@ -53,7 +55,10 @@ func (db *Database) FindAll(limit int, RespPayload interface{}) (interface{}, er
 	reslut := db.Database.Limit(limit).Find(&RespPayload)
 	return RespPayload, reslut.Error
 }
+func (db *Database) UpdateRow(ctx context.Context, Model interface{}, Col string, NewVal interface{}) *gorm.DB {
+	return db.Database.Model(Model).WithContext(ctx).Update(Col, NewVal)
+}
 
-func (db *Database) Preload(ModelName string) *gorm.DB {
-	return db.Database.Preload(ModelName)
+func (db *Database) DeleteRecordById(ctx context.Context, Model interface{}, Id uint) *gorm.DB {
+	return db.Database.WithContext(ctx).Delete(Model, Id)
 }
