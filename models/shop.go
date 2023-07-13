@@ -17,7 +17,6 @@ type Shop struct {
 
 type ManipulatorShop interface {
 	CreateShop(ctx context.Context, shop Shop, user *User) error
-	AddProducts(ctx context.Context, product []Product) error
 	GetShopByID(ctx context.Context, ID uint) (Shop, error)
 	GetShopByName(ctx context.Context, Name string) (Shop, error)
 	FetchAll(ctx context.Context, limit int) ([]Shop, error)
