@@ -34,27 +34,27 @@ func (lc *LoginController) Login(c *gin.Context) {
 	}
 
 	ctx, cancel := context.WithTimeout(c, time.Second*time.Duration(lc.Env.ContextTimeout))
-	usr, Err := lc.UsrLogic.GetByEmail(ctx, req.Email)
+	usr, err := lc.UsrLogic.GetByEmail(ctx, req.Email)
 	defer cancel()
-	if Err != nil {
+	if err != nil {
 		c.JSON(http.StatusBadRequest, models.ErrorResponse{Message: "Wrong Email"})
 		return
 	}
 
-	ok := bcrypt.CompareHashAndPassword([]byte(usr.Password), []byte(req.Password))
-	if ok != nil {
+	err = bcrypt.CompareHashAndPassword([]byte(usr.Password), []byte(req.Password))
+	if err != nil {
 		c.JSON(http.StatusBadRequest, models.ErrorResponse{Message: "Wrong password"})
 		return
 	}
 
-	accessToken, Aerr := jwtutilities.CreateAccessToken(usr, lc.Env.AccessTokenSecret, lc.Env.AccessTokenExpiry)
-	if Aerr != nil {
-		c.JSON(http.StatusInternalServerError, models.ErrorResponse{Message: Aerr.Error()})
+	accessToken, err := jwtutilities.CreateAccessToken(usr, lc.Env.AccessTokenSecret, lc.Env.AccessTokenExpiry)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.ErrorResponse{Message: err.Error()})
 		return
 	}
-	refreshToken, Rerr := jwtutilities.CreateRefreshToken(usr, lc.Env.RefreshTokenSecret, lc.Env.RefreshTokenExpiry)
-	if Rerr != nil {
-		c.JSON(http.StatusInternalServerError, models.ErrorResponse{Message: Rerr.Error()})
+	refreshToken, err := jwtutilities.CreateRefreshToken(usr, lc.Env.RefreshTokenSecret, lc.Env.RefreshTokenExpiry)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.ErrorResponse{Message: err.Error()})
 		return
 	}
 

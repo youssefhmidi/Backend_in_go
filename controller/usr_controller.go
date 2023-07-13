@@ -2,6 +2,7 @@ package controller
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -23,7 +24,8 @@ func NewUserController(ul models.ManipulatorUser, env *bootstrap.Env) models.Use
 	}
 }
 func (uc UserController) Me(c *gin.Context) {
-	token := c.Request.Header.Get("Authorization")
+	resp := c.MustGet("Acces_token")
+	token := resp.(string)
 	Authorized, err := jwtutilities.IsAuthorized(token, uc.Env.AccessTokenSecret)
 
 	if err != nil {
@@ -44,6 +46,7 @@ func (uc UserController) Me(c *gin.Context) {
 
 	ctx, cancel := context.WithTimeout(c, time.Second*time.Duration(uc.Env.ContextTimeout))
 	usr, err := uc.UsrLogic.GetById(ctx, ID)
+	fmt.Println(usr)
 	defer cancel()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, models.ErrorResponse{Message: err.Error()})

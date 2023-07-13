@@ -44,9 +44,9 @@ func (sc SignUpController) SignUp(c *gin.Context) {
 	}
 
 	// generate encrypted password
-	pass, Err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
-	if Err != nil {
-		c.JSON(http.StatusInternalServerError, models.ErrorResponse{Message: Err.Error()})
+	pass, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.ErrorResponse{Message: err.Error()})
 		return
 	}
 
