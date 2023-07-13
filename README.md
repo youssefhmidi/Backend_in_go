@@ -52,6 +52,8 @@ there will be 5 Requests possible
         - delete: " /shop/delete "✅
         - edit:   " /shop/edit "✅
         - access a specific shop: " /shop/get?name='Shop name' " or " /shop/get?id='Shop id' " ✅
+        - add products: "/shop/getproducts" 
+        - get products  "/shop/addproducts"
 - "/browse/": an endpoint where user can: view public shops and buy products
     - It will contain these Requests:
         - get the most recent ,aka the top 10: " /browse/recents "
