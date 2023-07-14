@@ -12,7 +12,7 @@ type Product struct {
 	ShopID      uint
 	Name        string
 	Description string
-	Price       string
+	Price       int
 	Details     datatypes.JSON
 }
 
@@ -24,4 +24,16 @@ type ProductRoute interface {
 type ManipulatorProduct interface {
 	AddProducts(ctx context.Context, product []Product, shop *Shop) error
 	GetProducts(ctx context.Context, shop Shop, limit int) ([]Product, error)
+}
+
+type ProductJSONStructure struct {
+	Name        string         `json:"name"`
+	Description string         `json:"description"`
+	Price       int            `json:"price"`
+	Details     datatypes.JSON `json:"details"`
+}
+
+type AddProductRequest struct {
+	ShopName string                 `json:"shop_name"`
+	Product  []ProductJSONStructure `json:"products"`
 }

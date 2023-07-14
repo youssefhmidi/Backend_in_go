@@ -25,3 +25,11 @@ func (sl *ProductLogic) GetProducts(ctx context.Context, shop models.Shop, limit
 	slice := Payload.([]models.Product)
 	return slice, err
 }
+
+func (sl *ProductLogic) GetParentShop(ctx context.Context, product models.Product) models.Shop {
+	return models.Shop{}
+}
+
+func (sl *ProductLogic) FetchAllProducts(ctx context.Context) []models.Product {
+	return []models.Product{}
+}

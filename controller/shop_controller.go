@@ -54,9 +54,10 @@ func (sc *ShopController) CreateShop(c *gin.Context) {
 	}
 
 	shop := models.Shop{
-		Name:     req.Name,
-		Category: req.Category,
-		IsPrivet: req.IsPrivet,
+		Name:        req.Name,
+		Category:    req.Category,
+		IsPrivet:    req.IsPrivet,
+		Description: req.Description,
 	}
 	ctx, cancel = context.WithTimeout(c, time.Second*time.Duration(sc.Env.ContextTimeout))
 	err = sc.ShopLogic.CreateShop(ctx, shop, &user)

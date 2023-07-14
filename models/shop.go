@@ -8,11 +8,12 @@ import (
 
 type Shop struct {
 	gorm.Model
-	OwnerID  uint
-	Name     string `gorm:"uniqueIndex"`
-	Category string
-	IsPrivet bool
-	Products []Product `gorm:"ForeignKey:ShopID"`
+	OwnerID     uint
+	Name        string `gorm:"uniqueIndex"`
+	Category    string
+	IsPrivet    bool
+	Description string
+	Products    []Product `gorm:"ForeignKey:ShopID"`
 }
 
 type ManipulatorShop interface {
@@ -33,9 +34,10 @@ type ShopRoutes interface {
 }
 
 type CreateShopRequest struct {
-	Name     string `json:"name"`
-	Category string `json:"category"`
-	IsPrivet bool   `json:"is_privet"`
+	Name        string `json:"name"`
+	Category    string `json:"category"`
+	IsPrivet    bool   `json:"is_privet"`
+	Description string `json:"description"`
 }
 
 type EditRequest struct {

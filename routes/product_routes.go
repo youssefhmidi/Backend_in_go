@@ -10,7 +10,8 @@ import (
 func NewProductRoute(db database.SqliteDatabase, env *bootstrap.Env, group *gin.RouterGroup) {
 	pl := database.NewProductLogic(db)
 	sl := database.NewShopLogic(db)
-	pc := controller.NewProductController(pl, env, sl)
+	ul := database.NewUserLogic(db)
+	pc := controller.NewProductController(pl, env, sl, ul)
 
 	group.GET("/getproducts", pc.GetProduct)
 	group.POST("/addproduct", pc.AddProduct)
