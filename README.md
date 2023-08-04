@@ -52,8 +52,8 @@ there will be 5 Requests possible
         - delete: " /shop/delete "✅
         - edit:   " /shop/edit "✅
         - access a specific shop: " /shop/get?name='Shop name' " or " /shop/get?id='Shop id' " ✅
-        - add products: "/shop/getproducts" ✅
-        - get products  "/shop/addproducts"✅
+        - add products: "/shop/product" `method POST`✅
+        - get products  "/shop/product" `method GET`✅
         - post an order "/shop/order" `method POST`
         - get shop's orders and their status "/shop/order" `method GET`
 - "/browse/": an endpoint where user can: view public shops and buy products
