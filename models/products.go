@@ -14,6 +14,7 @@ type Product struct {
 	Description string
 	Price       int
 	Details     datatypes.JSON
+	Orders      []Order `gorm:"many2many:product_order"`
 }
 
 type ProductRoute interface {
@@ -22,6 +23,7 @@ type ProductRoute interface {
 }
 
 type ManipulatorProduct interface {
+	GetProductById(ctx context.Context, Id uint) (Product, error)
 	AddProducts(ctx context.Context, product []Product, shop *Shop) error
 	GetProducts(ctx context.Context, shop Shop, limit int) ([]Product, error)
 }

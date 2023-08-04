@@ -15,7 +15,7 @@ type SqliteDatabase interface {
 	Add(ctx context.Context, Input interface{}) *gorm.DB
 	FindOneById(ctx context.Context, VarToAssign interface{}, id uint) *gorm.DB
 	FindOneByCol(ctx context.Context, VarToAssign interface{}, Col string, Input string) *gorm.DB
-	AppendTo(field string, Model interface{}, Paylod interface{}) error
+	AppendTo(field string, Model interface{}, Paylod interface{}, ctx context.Context) error
 	FindAll(limit int, RespPayload interface{}) (interface{}, error)
 	FindAllByCol(limit int, RespPayload interface{}, Col string, Input any) (interface{}, error)
 	UpdateRow(ctx context.Context, Model interface{}, Col string, NewVal interface{}) *gorm.DB
@@ -48,8 +48,8 @@ func (db *Database) FindOneByCol(ctx context.Context, VarToAssign interface{}, C
 	return db.Database.WithContext(ctx).Preload(clause.Associations).First(VarToAssign, fmt.Sprintf("%v = ?", Col), Input)
 }
 
-func (db *Database) AppendTo(field string, Model interface{}, Paylod interface{}) error {
-	return db.Database.Model(Model).Association(field).Append(Paylod)
+func (db *Database) AppendTo(field string, Model interface{}, Paylod interface{}, ctx context.Context) error {
+	return db.Database.Model(Model).WithContext(ctx).Association(field).Append(Paylod)
 }
 
 func (db *Database) FindAll(limit int, RespPayload interface{}) (interface{}, error) {

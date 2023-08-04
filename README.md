@@ -54,6 +54,8 @@ there will be 5 Requests possible
         - access a specific shop: " /shop/get?name='Shop name' " or " /shop/get?id='Shop id' " ✅
         - add products: "/shop/getproducts" ✅
         - get products  "/shop/addproducts"✅
+        - post an order "/shop/order" `method POST`
+        - get shop's orders and their status "/shop/order" `method GET`
 - "/browse/": an endpoint where user can: view public shops and buy products
     - It will contain these Requests:
         - get the most recent ,aka the top 10: " /browse/recents "

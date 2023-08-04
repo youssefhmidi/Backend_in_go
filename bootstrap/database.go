@@ -14,7 +14,7 @@ func InitDB(location string) database.SqliteDatabase {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-	DB.Database.AutoMigrate(&models.User{}, &models.Shop{}, &models.Product{})
+	DB.Database.AutoMigrate(&models.User{}, &models.Shop{}, &models.Product{}, &models.Order{})
 
 	return &DB
 }

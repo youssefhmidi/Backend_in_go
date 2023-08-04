@@ -14,6 +14,7 @@ type Shop struct {
 	IsPrivet    bool
 	Description string
 	Products    []Product `gorm:"ForeignKey:ShopID"`
+	Orders      []Order   `gorm:"ForeignKey:ShopID"`
 }
 
 type ManipulatorShop interface {

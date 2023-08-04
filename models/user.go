@@ -12,7 +12,8 @@ type User struct {
 	Username string
 	Password string
 	Email    string
-	Shops    []Shop `gorm:"foreignKey:OwnerID"`
+	Shops    []Shop  `gorm:"foreignKey:OwnerID"`
+	Orders   []Order `gorm:"foreignKey:OrdererID"`
 }
 
 // interface to create/delete/update the User table

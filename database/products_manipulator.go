@@ -16,20 +16,25 @@ func NewProductLogic(Db SqliteDatabase) models.ManipulatorProduct {
 	}
 }
 
-func (sl *ProductLogic) AddProducts(ctx context.Context, products []models.Product, shop *models.Shop) error {
-	return sl.db.AppendTo("Products", shop, products)
+func (pl *ProductLogic) AddProducts(ctx context.Context, products []models.Product, shop *models.Shop) error {
+	return pl.db.AppendTo("Products", shop, products, ctx)
 }
 
-func (sl *ProductLogic) GetProducts(ctx context.Context, shop models.Shop, limit int) ([]models.Product, error) {
-	Payload, err := sl.db.FindAllByCol(limit, []models.Product{}, "shop_id", shop.ID)
-	slice := Payload.([]models.Product)
-	return slice, err
+func (pl *ProductLogic) GetProducts(ctx context.Context, shop models.Shop, limit int) ([]models.Product, error) {
+	Payload, err := pl.db.FindAllByCol(limit, []models.Product{}, "shop_id", shop.ID)
+	plice := Payload.([]models.Product)
+	return plice, err
+}
+func (pl *ProductLogic) GetProductById(ctx context.Context, Id uint) (models.Product, error) {
+	var out models.Product
+	res := pl.db.FindOneById(ctx, &out, Id)
+	return out, res.Error
 }
 
-func (sl *ProductLogic) GetParentShop(ctx context.Context, product models.Product) models.Shop {
+func (pl *ProductLogic) GetParentShop(ctx context.Context, product models.Product) models.Shop {
 	return models.Shop{}
 }
 
-func (sl *ProductLogic) FetchAllProducts(ctx context.Context) []models.Product {
+func (pl *ProductLogic) FetchAllProducts(ctx context.Context) []models.Product {
 	return []models.Product{}
 }

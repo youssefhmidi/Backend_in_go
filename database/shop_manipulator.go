@@ -19,7 +19,7 @@ func NewShopLogic(Db SqliteDatabase) models.ManipulatorShop {
 
 func (sl *ShopLogic) CreateShop(ctx context.Context, shop models.Shop, user *models.User) error {
 	sl.shop = &shop
-	return sl.db.AppendTo("Shops", user, []models.Shop{shop})
+	return sl.db.AppendTo("Shops", user, []models.Shop{shop}, ctx)
 }
 
 func (sl *ShopLogic) GetShopByID(ctx context.Context, ID uint) (models.Shop, error) {
