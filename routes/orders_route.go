@@ -7,7 +7,7 @@ import (
 	"github.com/youssefhmidi/Backend_in_go/database"
 )
 
-func NewOrderRoutes(db database.SqliteDatabase, env *bootstrap.Env, group *gin.RouterGroup) {
+func NewOrderRoute(db database.SqliteDatabase, env *bootstrap.Env, group *gin.RouterGroup) {
 	ul, pl, ol, sl := database.NewUserLogic(db),
 		database.NewProductLogic(db),
 		database.NewOrderLogic(db),
@@ -15,5 +15,5 @@ func NewOrderRoutes(db database.SqliteDatabase, env *bootstrap.Env, group *gin.R
 
 	oc := controller.NewOrderController(env, ol, ul, sl, pl)
 	group.POST("/order", oc.PostOrder)
-	group.POST("/order", oc.GetOrder)
+	group.GET("/order", oc.GetOrder)
 }

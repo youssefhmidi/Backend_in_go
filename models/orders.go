@@ -16,6 +16,7 @@ type Order struct {
 
 type ManupilatorOrder interface {
 	PostOrder(ctx context.Context, Products []Product, ParentShop Shop, Orderer User) []error
+	GetOrderById(ctx context.Context, Id uint) (Order, error)
 }
 
 type OrderReqStructure struct {

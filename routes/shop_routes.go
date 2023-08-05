@@ -14,6 +14,7 @@ func NewShopRoutes(db database.SqliteDatabase, env *bootstrap.Env, group *gin.Ro
 	shopEndpoint := group.Group("/shop")
 
 	NewProductRoute(db, env, shopEndpoint)
+	NewOrderRoute(db, env, shopEndpoint)
 
 	shopEndpoint.POST("/create", sc.CreateShop)
 	shopEndpoint.GET("/get", sc.GetShop)

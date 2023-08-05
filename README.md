@@ -28,12 +28,12 @@ Tables:
     - Descriptions
     - Price
     - Detail "JSON type"
-- order Table:
+- order Table: ✅
     - ID
     - ShopID
     - OrdererID
     - DateCreated
-- productorder Table: "junction table for the 'Many to Many' relation betwwen product and order
+- productorder Table: "junction table for the 'Many to Many' relation betwwen product and order ✅
     - ID
     - Product ID
     - Order ID
