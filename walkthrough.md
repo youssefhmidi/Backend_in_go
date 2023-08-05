@@ -18,7 +18,7 @@ Contais all the possible routes that users can request to
 All the testing files of the api functionnalities and for debuging
 
 ### Database Directory "/database/"
-the database connector and initializer
+the database connector and initializer and has the repository functionalities
 
 ### Models Directory "/models/"
 contains informations about the models and the response/request structure
