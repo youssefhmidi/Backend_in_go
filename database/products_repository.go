@@ -21,7 +21,7 @@ func (pl *ProductLogic) AddProducts(ctx context.Context, products []models.Produ
 }
 
 func (pl *ProductLogic) GetProducts(ctx context.Context, shop models.Shop, limit int) ([]models.Product, error) {
-	Payload, err := pl.db.FindAllByCol(limit, []models.Product{}, "shop_id", shop.ID)
+	Payload, err := pl.db.FindAllByCol(limit, []models.Product{}, "shop_id", shop.ID, ctx)
 	plice := Payload.([]models.Product)
 	return plice, err
 }

@@ -35,7 +35,11 @@ func CompareProductsandShop(s models.Shop, p models.Product) bool {
 
 func (oc *OrderController) PostOrder(c *gin.Context) {
 	var req models.OrderReqStructure
-	c.ShouldBind(&req)
+	err := c.ShouldBind(&req)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, models.ErrorResponse{Message: "request structure invalid, see docs"})
+		return
+	}
 	access := c.MustGet("Acces_token").(string)
 
 	userId, err := jwtutilities.GetIDFromToken(access, oc.Env.AccessTokenSecret)

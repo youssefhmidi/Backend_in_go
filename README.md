@@ -54,9 +54,10 @@ there will be 5 Requests possible
         - access a specific shop: " /shop/get?name='Shop name' " or " /shop/get?id='Shop id' " ✅
         - add products: "/shop/product" `method POST`✅
         - get products  "/shop/product" `method GET`✅
-        - post an order "/shop/order" `method POST`
-        - get shop's orders and their status "/shop/order" `method GET`
+        - post an order "/shop/order" `method POST` ✅
+        - get shop's orders and their status "/shop/order" `method GET`✅
 - "/browse/": an endpoint where user can: view public shops and buy products
     - It will contain these Requests:
-        - get the most recent ,aka the top 10: " /browse/recents "
-        - get by filter: " /browse/filter " + a payload with data of the filter
+        - get the most recent ,aka the top 10: " /browse " ✅
+        - get by filter: " /browse?filter=... " + a payload with data of the filter ✅
+    Note : the filter is just an expression like "category=toys" or "name=somthing" in futur update I will make a complex filter type

@@ -18,4 +18,5 @@ func SetupRoutes(db database.SqliteDatabase, env bootstrap.Env, parentRoute *gin
 	PrivetRoutes.Use(middleware.UseTokenVerification(env.AccessTokenSecret))
 	NewUserRoute(db, &env, PrivetRoutes)
 	NewShopRoutes(db, &env, PrivetRoutes)
+	NewBrowseRoute(db, &env, PrivetRoutes)
 }

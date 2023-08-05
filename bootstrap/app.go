@@ -8,11 +8,19 @@ type Application struct {
 }
 
 func App() *Application {
-	db := InitDB("./database/db/testdb.db")
+	var db database.SqliteDatabase
 	env := NewEnv(".env")
-
+	if env.ReleaseMode {
+		db = InitDB("./database/db/officialdb.db")
+		return &Application{
+			Database: db,
+			Env:      env,
+		}
+	}
+	db = InitDB("./database/db/testdb.db")
 	return &Application{
 		Database: db,
 		Env:      env,
 	}
+
 }

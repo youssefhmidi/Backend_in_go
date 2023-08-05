@@ -22,6 +22,7 @@ type ManipulatorShop interface {
 	GetShopByID(ctx context.Context, ID uint) (Shop, error)
 	GetShopByName(ctx context.Context, Name string) (Shop, error)
 	FetchAll(ctx context.Context, limit int) ([]Shop, error)
+	FetchAllByFilter(ctx context.Context, limit int, filter string, filterVal string) ([]Shop, error)
 	UpdateShop(ctx context.Context, Shop *Shop, field string, value interface{}) error
 	DeleteShop(ctx context.Context, Shop *Shop) error
 }
@@ -32,6 +33,9 @@ type ShopRoutes interface {
 	GetAllShop(c *gin.Context)
 	EditShop(c *gin.Context)
 	DeleteShop(c *gin.Context)
+}
+type BrowseRoutes interface {
+	Browse(c *gin.Context)
 }
 
 type CreateShopRequest struct {

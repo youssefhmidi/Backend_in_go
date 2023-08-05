@@ -39,6 +39,11 @@ func (sl *ShopLogic) FetchAll(ctx context.Context, limit int) ([]models.Shop, er
 	return slice, err
 }
 
+func (sl *ShopLogic) FetchAllByFilter(ctx context.Context, limit int, filter string, filterVal string) ([]models.Shop, error) {
+	resp, err := sl.db.FindAllByCol(limit, []models.Shop{}, filter, filterVal, ctx)
+	return resp.([]models.Shop), err
+}
+
 func (sl *ShopLogic) UpdateShop(ctx context.Context, Shop *models.Shop, field string, value interface{}) error {
 	return sl.db.UpdateRow(ctx, Shop, field, value).Error
 }

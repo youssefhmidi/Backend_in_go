@@ -37,7 +37,7 @@ func (lc *LoginController) Login(c *gin.Context) {
 	usr, err := lc.UsrLogic.GetByEmail(ctx, req.Email)
 	defer cancel()
 	if err != nil {
-		c.JSON(http.StatusBadRequest, models.ErrorResponse{Message: "Wrong Email"})
+		c.JSON(http.StatusBadRequest, models.ErrorResponse{Message: "Wrong Email/user Not found"})
 		return
 	}
 

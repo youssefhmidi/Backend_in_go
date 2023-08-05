@@ -12,6 +12,7 @@ type Env struct {
 	AccessTokenExpiry  int    `mapstructure:"ACCESS_TOKEN_EXPIRY"`
 	RefreshTokenExpiry int    `mapstructure:"REFRESH_TOKEN_EXPIRY"`
 	ContextTimeout     int    `mapstructure:"CONTEXT_TIMEOUT"`
+	ReleaseMode        bool   `mapstructure:"RELEASEMODE"`
 }
 
 func NewEnv(dst string) Env {

@@ -17,7 +17,7 @@ type SqliteDatabase interface {
 	FindOneByCol(ctx context.Context, VarToAssign interface{}, Col string, Input string) *gorm.DB
 	AppendTo(field string, Model interface{}, Paylod interface{}, ctx context.Context) error
 	FindAll(limit int, RespPayload interface{}) (interface{}, error)
-	FindAllByCol(limit int, RespPayload interface{}, Col string, Input any) (interface{}, error)
+	FindAllByCol(limit int, RespPayload interface{}, Col string, Input any, ctx context.Context) (interface{}, error)
 	UpdateRow(ctx context.Context, Model interface{}, Col string, NewVal interface{}) *gorm.DB
 	DeleteRecordById(ctx context.Context, Model interface{}, Id uint) *gorm.DB
 }
@@ -45,7 +45,7 @@ func (db *Database) FindOneById(ctx context.Context, VarToAssign interface{}, Id
 }
 
 func (db *Database) FindOneByCol(ctx context.Context, VarToAssign interface{}, Col string, Input string) *gorm.DB {
-	return db.Database.WithContext(ctx).Preload(clause.Associations).First(VarToAssign, fmt.Sprintf("%v = ?", Col), Input)
+	return db.Database.Preload(clause.Associations).WithContext(ctx).First(VarToAssign, fmt.Sprintf("%v = ?", Col), Input)
 }
 
 func (db *Database) AppendTo(field string, Model interface{}, Paylod interface{}, ctx context.Context) error {
@@ -57,8 +57,8 @@ func (db *Database) FindAll(limit int, RespPayload interface{}) (interface{}, er
 	return RespPayload, reslut.Error
 }
 
-func (db *Database) FindAllByCol(limit int, RespPayload interface{}, Col string, Input any) (interface{}, error) {
-	reslut := db.Database.Preload(clause.Associations).Limit(limit).Find(&RespPayload, fmt.Sprintf("%v = ?", Col), Input)
+func (db *Database) FindAllByCol(limit int, RespPayload interface{}, Col string, Input any, ctx context.Context) (interface{}, error) {
+	reslut := db.Database.Preload(clause.Associations).WithContext(ctx).Limit(limit).Find(&RespPayload, fmt.Sprintf("%v = ?", Col), Input)
 	return RespPayload, reslut.Error
 }
 func (db *Database) UpdateRow(ctx context.Context, Model interface{}, Col string, NewVal interface{}) *gorm.DB {
