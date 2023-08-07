@@ -30,11 +30,3 @@ func (pl *ProductLogic) GetProductById(ctx context.Context, Id uint) (models.Pro
 	res := pl.db.FindOneById(ctx, &out, Id)
 	return out, res.Error
 }
-
-func (pl *ProductLogic) GetParentShop(ctx context.Context, product models.Product) models.Shop {
-	return models.Shop{}
-}
-
-func (pl *ProductLogic) FetchAllProducts(ctx context.Context) []models.Product {
-	return []models.Product{}
-}
